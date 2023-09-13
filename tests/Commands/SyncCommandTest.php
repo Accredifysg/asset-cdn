@@ -90,14 +90,15 @@ class SyncCommandTest extends TestCase
             [
                 'path' => 'css',
                 'filename' => 'front.css',
-                'base' => __DIR__.'/../testfiles/dummy',
+                'base' => __DIR__ . '/../testfiles/dummy',
             ],
         ]);
 
-        $this->assertNotEquals($expectedFileSize,
+        $this->assertNotEquals(
+            $expectedFileSize,
             Storage::disk('test_filesystem')
                 ->size('css/front.css')
-            );
+        );
 
         $this->setFilesInConfig([
             'include' => [
@@ -115,7 +116,8 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedFileSize,
+        $this->assertEquals(
+            $expectedFileSize,
             Storage::disk('test_filesystem')
                 ->size('css/front.css')
         );
@@ -131,11 +133,12 @@ class SyncCommandTest extends TestCase
             [
                 'path' => 'js',
                 'filename' => 'front.app.js',
-                'base' => __DIR__.'/../testfiles/dummy',
+                'base' => __DIR__ . '/../testfiles/dummy',
             ],
         ]);
 
-        $this->assertNotEquals($expectedHash,
+        $this->assertNotEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('js/front.app.js'))
         );
@@ -156,7 +159,8 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedHash,
+        $this->assertEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('js/front.app.js'))
         );
@@ -166,7 +170,7 @@ class SyncCommandTest extends TestCase
     public function command_syncs_img_file_with_same_size_but_different_hash()
     {
         $src = public_path('img/layout/ph3x2.png');
-        $dummySrc = __DIR__.'/../testfiles/dummy/img/layout/ph3x2.png';
+        $dummySrc = __DIR__ . '/../testfiles/dummy/img/layout/ph3x2.png';
         $expectedHash = md5_file($src);
         $dummyHash = md5_file($dummySrc);
 
@@ -177,11 +181,12 @@ class SyncCommandTest extends TestCase
             [
                 'path' => 'img/layout',
                 'filename' => 'ph3x2.png',
-                'base' => __DIR__.'/../testfiles/dummy',
+                'base' => __DIR__ . '/../testfiles/dummy',
             ],
         ]);
 
-        $this->assertNotEquals($expectedHash,
+        $this->assertNotEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('img/layout/ph3x2.png'))
         );
@@ -202,7 +207,8 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedHash,
+        $this->assertEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('img/layout/ph3x2.png'))
         );
@@ -238,7 +244,7 @@ class SyncCommandTest extends TestCase
                     string $name,
                     array $options
                 ) use ($expectedOptions) {
-                    $this->assertArraySubset($expectedOptions, $options);
+                    $this->assertSame($expectedOptions, array_intersect_key($options, $expectedOptions));
 
                     return true;
                 }

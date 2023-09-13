@@ -12,6 +12,10 @@
 Serve Laravel Assets from a Content Delivery Network (CDN)
 </strong></p>
 
+> [!IMPORTANT]
+> This repository was forked from [arubacao/asset-cdn](https://github.com/arubacao/asset-cdn) and modified to work with Laravel 9.
+> The original repository is no longer maintained.
+
 ## Introduction
 
 This package lets you **push**, **sync**, **delete** and **serve** assets to/from a CDN of your choice e.g. AWS Cloudfront.  
