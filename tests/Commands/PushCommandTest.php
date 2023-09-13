@@ -56,7 +56,7 @@ class PushCommandTest extends TestCase
                     string $name,
                     array $options
                 ) use ($expectedOptions) {
-                    $this->assertArraySubset($expectedOptions, $options);
+                    $this->assertSame($expectedOptions, array_intersect_key($options, $expectedOptions));
 
                     return true;
                 }
