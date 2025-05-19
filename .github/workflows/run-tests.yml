@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         php: [8.0, 8.1]
-        laravel: [8.*, 9.*]
+        laravel: [8.*, 9.*, 10.*, 11.*, 12.*]
         include:
           - laravel: 8.*
             testbench: 6.*
@@ -20,7 +20,16 @@ jobs:
           - laravel: 9.*
             testbench: 7.*
             phpunit: ^9.0
-
+          - laravel: 10.*
+            testbench: 7.*
+            phpunit: ^9.0       
+          - laravel: 11.*
+            testbench: 7.*
+            phpunit: ^9.0       
+          - laravel: 12.*
+            testbench: 7.*
+            phpunit: ^9.0 
+                
     name: P${{ matrix.php }} - L${{ matrix.laravel }}
 
     steps:
