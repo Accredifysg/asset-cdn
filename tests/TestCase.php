@@ -7,8 +7,7 @@ use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 abstract class TestCase extends Orchestra
 {
-    /** @var \Spatie\TemporaryDirectory\TemporaryDirectory */
-    protected $tempDir;
+    protected TemporaryDirectory $tempDir;
 
     /**
      * Setup the test environment.
@@ -39,7 +38,7 @@ abstract class TestCase extends Orchestra
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             \Arubacao\AssetCdn\AssetCdnServiceProvider::class,
@@ -49,8 +48,10 @@ abstract class TestCase extends Orchestra
     /**
      * @param \Illuminate\Foundation\Application $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
+        $publicPath = __DIR__.'/testfiles/public';
+
 //        $app['config']->set('filesystems.disks.public', [
 //            'driver' => 'local',
 //            'root' => $this->getMediaDirectory(),
@@ -65,12 +66,16 @@ abstract class TestCase extends Orchestra
         $app['config']->set('asset-cdn.cdn_url', 'http://cdn.localhost');
         $app['config']->set('asset-cdn.filesystem.disk', 'test_filesystem');
 
-        $app->bind('path.public', function () {
-            return __DIR__.'/testfiles/public';
+        if (method_exists($app, 'usePublicPath')) {
+            $app->usePublicPath($publicPath);
+        }
+
+        $app->bind('path.public', function () use ($publicPath) {
+            return $publicPath;
         });
     }
 
-    protected function setFilesInConfig(array $config)
+    protected function setFilesInConfig(array $config): void
     {
         $emptyConfig = [
             'ignoreDotFiles' => true,
