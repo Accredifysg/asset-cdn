@@ -1,10 +1,11 @@
 <?php
 
 namespace Arubacao\AssetCdn\Test\Finder;
+use PHPUnit\Framework\Attributes\Test;
 
 class CombinedFinderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function find_all_included_files()
     {
         $fileConfig = [
@@ -37,7 +38,7 @@ class CombinedFinderTest extends TestCase
         $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
     }
 
-    /** @test */
+    #[Test]
     public function find_all_js_paths_and_backcss_and_robotstxt_exclude_vendor_path_and_backjs()
     {
         $fileConfig = [

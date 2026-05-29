@@ -1,13 +1,14 @@
 <?php
 
 namespace Arubacao\AssetCdn\Test\Commands;
+use PHPUnit\Framework\Attributes\Test;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class SyncCommandTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function command_syncs_all_js_paths_and_deletes_css_files_to_cdn()
     {
         $this->seedCdnFilesystem([
@@ -45,7 +46,7 @@ class SyncCommandTest extends TestCase
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
     }
 
-    /** @test */
+    #[Test]
     public function command_does_not_sync_identical_sync_files()
     {
         $this->seedCdnFilesystem([
@@ -80,7 +81,7 @@ class SyncCommandTest extends TestCase
         $this->assertEquals($modifiedBeforeSync, $modifiedAfterSync);
     }
 
-    /** @test */
+    #[Test]
     public function command_syncs_files_with_different_size()
     {
         $src = public_path('css/front.css');
@@ -123,7 +124,7 @@ class SyncCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function command_syncs_js_file_with_same_size_but_different_hash()
     {
         $src = public_path('js/front.app.js');
@@ -166,7 +167,7 @@ class SyncCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function command_syncs_img_file_with_same_size_but_different_hash()
     {
         $src = public_path('img/layout/ph3x2.png');
@@ -214,7 +215,7 @@ class SyncCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function command_receives_options()
     {
         $this->setFilesInConfig([

@@ -1,13 +1,14 @@
 <?php
 
 namespace Arubacao\AssetCdn\Test\Commands;
+use PHPUnit\Framework\Attributes\Test;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class PushCommandTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function command_pushes_all_js_paths_to_cdn()
     {
         $this->setFilesInConfig([
@@ -30,7 +31,7 @@ class PushCommandTest extends TestCase
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
     }
 
-    /** @test */
+    #[Test]
     public function command_receives_options()
     {
         $this->setFilesInConfig([
