@@ -1,12 +1,13 @@
 <?php
 
 namespace Arubacao\AssetCdn\Test\Helper;
+use PHPUnit\Framework\Attributes\Test;
 
 use Arubacao\AssetCdn\Test\TestCase;
 
 class AssetTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function asset_cdn_falls_back_to_asset_if_disabled()
     {
         $this->app['config']->set('asset-cdn.use_cdn', false);
@@ -19,7 +20,7 @@ class AssetTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function asset_cdn_returns_correct_url()
     {
         $urls = [

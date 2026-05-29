@@ -47,7 +47,7 @@ $ composer require arubacao/asset-cdn
 
 Notes:  
 
-- `arubacao/asset-cdn` is functional and fully tested for Laravel `8.*` and `9.*` on PHP `8.0` and `8.1`.
+- `arubacao/asset-cdn` is functional and fully tested for Laravel `11.*`, `12.*` and `13.*` on PHP `8.2`, `8.3` and `8.4`.
 
 ## Configuration
 
